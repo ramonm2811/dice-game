@@ -1,17 +1,50 @@
 'use strict';
 
-/* console.log(document.querySelector('.message').textContent);
+//Creamos un numero aleatorio entre 1-20
+const number = Math.floor(Math.random() * 20) + 1;
 
-document.querySelector('.message').textContent = 'Correct Number!';
-document.querySelector('.number').textContent = 13;
-document.querySelector('.score').textContent = 54;
- */
+//Valor inicial del Score
+let score = Number(document.querySelector('.score').textContent);
 
+//Agregamos el Event Listener del boton check
 document.querySelector('.check').addEventListener('click', checkNumber);
 
+//Funcion que evalua diferentes escenarios
 function checkNumber() {
   const guess = Number(document.querySelector('.guess').value);
-  document.querySelector('.message').textContent = !guess
-    ? 'Agregar un Numero'
-    : '';
+
+  //Que pasa si NO hay valor en Guess
+  if (!guess) {
+    document.querySelector('.message').textContent = 'Agregar Numero';
+    decreaseScore();
+  } //Que pasa sí Guess no esta en el rango del juego
+  else if (guess < 0 || guess > 20) {
+    alert('Debe ser un número entre 1 - 20');
+    //Que pasa sí Guess === Number
+  } else if (guess === number) {
+    document.querySelector('.number').textContent = number;
+    document.querySelector('.message').textContent = 'Haz ganado el juego';
+    //Que pasa si Guess esta muy alejada de Number
+  } else if (guess > number + 5 || guess < number - 5) {
+    document.querySelector('.message').textContent =
+      'Estas FRIO, sigue intentando';
+    decreaseScore();
+    //Que pasa sí Guess esta cerca de Number
+  } else if (guess < number + 5 || guess > number - 5) {
+    document.querySelector('.message').textContent =
+      'Estas TIBIO, sigue intentando';
+    decreaseScore();
+  }
 }
+
+//Funcion que disminuye el Score del juego
+function decreaseScore() {
+  score--;
+  document.querySelector('.score').textContent = score;
+}
+
+/* 
+Game Logic: 
+
+- 
+*/
