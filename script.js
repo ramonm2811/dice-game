@@ -1,5 +1,4 @@
 'use strict';
-
 //Creamos un numero aleatorio entre 1-20
 const number = Math.floor(Math.random() * 20) + 1;
 
@@ -8,6 +7,9 @@ let score = Number(document.querySelector('.score').textContent);
 
 //Agregamos el Event Listener del boton check
 document.querySelector('.check').addEventListener('click', checkNumber);
+
+//Event listener para el boton Again!
+document.querySelector('.again').addEventListener('click', initGame);
 
 //Funcion que evalua diferentes escenarios
 function checkNumber() {
@@ -24,6 +26,7 @@ function checkNumber() {
   } else if (guess === number) {
     document.querySelector('.number').textContent = number;
     document.querySelector('.message').textContent = 'Haz ganado el juego';
+    document.querySelector('body').style.backgroundColor = '#60b347';
     //Que pasa si Guess esta muy alejada de Number
   } else if (guess > number + 5 || guess < number - 5) {
     document.querySelector('.message').textContent =
@@ -41,6 +44,20 @@ function checkNumber() {
 function decreaseScore() {
   score--;
   document.querySelector('.score').textContent = score;
+  score;
+}
+
+function initGame() {
+  //Creamos un numero aleatorio entre 1-20
+  number = Math.floor(Math.random() * 20) + 1;
+
+  //Valor inicial del Score
+  score = Number(document.querySelector('.score').textContent);
+
+  //Color inicial del background
+  document.querySelector('body').style.backgroundColor = '#222';
+
+  document.querySelector('.number').textContent = '?';
 }
 
 /* 
